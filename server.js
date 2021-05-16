@@ -7,15 +7,17 @@ const register = require('./Controllers/register');
 const signin = require('./Controllers/signin');
 const userProfile = require('./Controllers/userProfile');
 const updateEntries = require('./Controllers/updateEntries');
+
+//process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0; 
 //Database connection.
  const dataBase= knex({
     client: 'pg',
-    connection: {
-      host : '127.0.0.1',
-      user : 'postgres',
-      password : 'test',
-      database : 'smart-brain'
-    }
+   connection: {
+     connectionString: process.env.DATABASE_URL,
+     ssl: {
+       rejectUnauthorized: false
+     }
+   }
   });
 
 const app = express();
