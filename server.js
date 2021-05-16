@@ -36,7 +36,7 @@ app.put('/image', (req, res) => updateEntries.handleEntries(req , res, dataBase)
 
 app.post('/imageUrl', (req, res) => updateEntries.handleImageURL(req , res));
 
-app.listen(3001);
+app.listen(process.env.PORT || 3001);
 
 /*
 root - get - Success
