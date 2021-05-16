@@ -13,13 +13,12 @@ const handleRegister = (req, res, dataBase , bcrypt) => {
         }).into('login').
         returning('email').
         then(emailForLogging => {
-            res.json(emailForLogging)
-            // return trx('users').returning('*').insert({
-            //  'email': emailForLogging[0],
-            //  'name': name,
-            //  joined: new Date()
-            // }).then(user => res.json(user[0]))
-            // .catch(err => res.status(400).json('Problem in registering.'))
+            return trx('users').returning('*').insert({
+             'email': emailForLogging[0],
+             'name': name,
+             'joined': new Date()
+            }).then(user => res.json(user[0]))
+            .catch(err => res.status(400).json('Problem in registering.'))
         }).then(trx.commit)
         .catch(trx.rollback);
     }).catch(err => res.status(400).json('Problem in registering.'))
