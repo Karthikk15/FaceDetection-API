@@ -18,10 +18,10 @@ const handleRegister = (req, res, dataBase , bcrypt) => {
              'name': name,
              'joined': new Date()
             }).then(user => res.json(user[0]))
-            .catch(err => res.status(400).json('Problem in registering.'))
+            .catch(err => res.status(400).json(err))
         }).then(trx.commit)
         .catch(trx.rollback);
-    }).catch(err => res.status(400).json('Problem in registering.'))
+    }).catch(err => res.status(400).json(err))
 }
 
 module.exports = {
